@@ -12,10 +12,13 @@ on:
     inputs:
       USER:
         required: true
+        type: string
       IMAGE_NAME:
         required: true
+        type: string
       SHA_SHORT:
         required: true
+        type: string
 
 jobs:
   # Post-Action Stage
