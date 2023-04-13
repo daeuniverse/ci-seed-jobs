@@ -12,10 +12,10 @@ on:
     outputs:
       git_sha_long:
         description: "The first output string"
-        value: ${{ needs.export-commit-sha.outputs.git_sha_long }}
+        value: ${{ jobs.export-commit-sha.outputs.git_sha_long }}
       git_sha_short:
         description: "The second output string"
-        value: ${{ needs.export-commit-sha.outputs.git_sha_short }}
+        value: ${{ jobs.export-commit-sha.outputs.git_sha_short }}
 
 jobs:
   # Pre-Action Stage
