@@ -1,4 +1,4 @@
-name: Checkout remote
+name: Export metadata from target ref
 
 on:
   workflow_call:
