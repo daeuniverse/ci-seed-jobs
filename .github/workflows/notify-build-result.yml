@@ -1,0 +1,39 @@
+name: Notify build result
+
+on:
+  workflow_call:
+    # Map input secrets to job
+    secrets:
+      TELEGRAM_TO:
+        required: true
+      TELEGRAM_TOKEN:
+        required: true
+    # Map input vars to job
+    inputs:
+      USER:
+        required: true
+        type: string
+      USER:
+        required: true
+      IMAGE_NAME:
+        required: true
+      SHA_SHORT:
+        required: true
+
+jobs:
+  # Post-Action Stage
+  notify-build-result:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send telegram message to notify build result
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          message: |
+            🏗 ${{ github.repository }}: Build #${{ github.run_number }} succeeded!
+
+            📦 Image URI: quay.io/${{ inputs.USER }}/${{ inputs.IMAGE_NAME }}:${{ inputs.SHA_SHORT }}-${{ github.run_number }}
+
+            🔨 Build Detail: [#${{ github.run_number }}](https://github.com/daeuniverse/container-estate/actions/runs/${{ github.run_id }})

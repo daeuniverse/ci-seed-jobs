@@ -17,7 +17,7 @@ on:
         description: "The second output string"
         value: ${{ jobs.notify-build-start.outputs.git_sha_short }}
 
-jobs:   
+jobs:
   # Pre-Action Stage
   notify-build-start:
     runs-on: ubuntu-latest
@@ -27,7 +27,7 @@ jobs:
         run: |
           echo "sha_long=${{ github.sha }}" >> $GITHUB_OUTPUT
           echo "sha_short=$(echo ${{ github.sha }} | cut -c1-6)" >> $GITHUB_OUTPUT
-          
+
       - name: Send telegram message on push
         uses: appleboy/telegram-action@master
         with:
@@ -36,9 +36,9 @@ jobs:
           format: markdown
           message: |
             🔨 ${{ github.actor }} pushed a new commit: ${{ steps.export_commit_sha.outputs.sha_short }} to [${{ github.repository }}](https://github.com/daeuniverse/container-estate) - [#${{ github.run_number }}](https://github.com/daeuniverse/container-estate/actions/runs/${{ github.run_id }}) 
-            
+
             [${{ steps.export_commit_sha.outputs.sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ github.event.commits[0].message }} by [${{ github.actor }}](https://http://github.com/yqlbu)
-    
+
     outputs:
       git_sha_long: ${{ steps.export_commit_sha.outputs.sha_long }}
       git_sha_short: ${{ steps.export_commit_sha.outputs.sha_short }}
