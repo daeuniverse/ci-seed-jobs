@@ -28,8 +28,8 @@ jobs:
       - name: Get HEAD git sha
         id: export_commit_sha
         run: |
-          echo "git_sha_long=${{ github.sha }}" >> $GITHUB_OUTPUT
-          echo "git_sha_short=$(echo ${{ github.sha }} | cut -c1-6)" >> $GITHUB_OUTPUT
+          echo "git_sha_long=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "git_sha_short=$(git rev-parse --short HEAD | cut -c1-6)" >> $GITHUB_OUTPUT
           echo "git_commit_msg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
 
     outputs:
