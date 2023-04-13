@@ -39,7 +39,7 @@ jobs:
           repository: ${{ inputs.repository }}
           fetch-depth: ${{ inputs.fetch-depth }}
           ref: ${{ inputs.ref }}
-      - name: Get HEAD metadata
+      - name: Get metadata from HEAD
         id: export
         run: |
           echo "git_sha_long=${{ inputs.ref }}" >> $GITHUB_OUTPUT
