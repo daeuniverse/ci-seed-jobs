@@ -44,4 +44,4 @@ jobs:
           message: |
             🔨 ${{ github.actor }} pushed a new commit: ${{ jobs.export-commit-sha.outputs.sha_short }} to [${{ github.repository }}](https://github.com/daeuniverse/container-estate) - [#${{ github.run_number }}](https://github.com/daeuniverse/container-estate/actions/runs/${{ github.run_id }})
 
-            [${{ jobs.export-commit-sha.outputs.sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ github.event.commits[0].message }} by [${{ github.actor }}](https://http://github.com/yqlbu)
+            [${{ jobs.export-commit-sha.outputs.sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ github.event.head_commit.message }} by [${{ github.actor }}](https://http://github.com/yqlbu)
