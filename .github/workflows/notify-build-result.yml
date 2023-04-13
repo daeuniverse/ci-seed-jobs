@@ -10,9 +10,6 @@ on:
         required: true
     # Map input vars to job
     inputs:
-      USER:
-        required: true
-        type: string
       IMAGE_NAME:
         required: true
         type: string
@@ -34,6 +31,6 @@ jobs:
           message: |
             🏗 ${{ github.repository }}: Build #${{ github.run_number }} succeeded!
 
-            📦 Image URI: quay.io/${{ inputs.USER }}/${{ inputs.IMAGE_NAME }}:${{ inputs.SHA_SHORT }}-${{ github.run_number }}
+            📦 Image URI: quay.io/${{ github.repository_owner }}/${{ inputs.IMAGE_NAME }}:${{ inputs.SHA_SHORT }}-${{ github.run_number }}
 
             🔨 Build Detail: [#${{ github.run_number }}](https://github.com/daeuniverse/container-estate/actions/runs/${{ github.run_id }})
