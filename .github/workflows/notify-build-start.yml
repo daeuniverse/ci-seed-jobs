@@ -2,18 +2,24 @@ name: Notify build start
 
 on:
   workflow_call:
+    # Map input secrets to job
+    secrets:
+      TELEGRAM_TO:
+        required: true
+      TELEGRAM_TOKEN:
+        required: true
     # Map the workflow outputs to job outputs
     outputs:
       git_sha_long:
         description: "The first output string"
-        value: ${{ jobs.notify.outputs.git_sha_long }}
+        value: ${{ jobs.notify-build-start.outputs.git_sha_long }}
       git_sha_short:
         description: "The second output string"
-        value: ${{ jobs.notify.outputs.git_sha_short }}
+        value: ${{ jobs.notify-build-start.outputs.git_sha_short }}
 
 jobs:   
   # Pre-Action Stage
-  notify:
+  notify-build-start:
     runs-on: ubuntu-latest
     steps:
       - name: Get HEAD git sha
