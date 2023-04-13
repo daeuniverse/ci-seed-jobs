@@ -10,6 +10,10 @@ on:
       ref:
         required: true
         type: string
+      fetch-depth:
+        required: false
+        default: 0
+        type: string
     # Map the workflow outputs to job outputs
     outputs:
       git_sha_long:
@@ -33,7 +37,7 @@ jobs:
       - uses: actions/checkout@master
         with:
           repository: ${{ inputs.repository }}
-          fetch-depth: 0
+          fetch-depth: ${{ inputs.fetch-depth }}
           ref: ${{ inputs.repository }}
       - name: Get HEAD metadata
         id: export
