@@ -11,15 +11,18 @@ on:
     # Map the workflow outputs to job outputs
     outputs:
       git_sha_long:
-        description: "The first output string"
-        value: ${{ jobs.export-commit-sha.outputs.git_sha_long }}
+        description: "git commit sha (long)"
+        value: ${{ jobs.export-metadata.outputs.git_sha_long }}
       git_sha_short:
-        description: "The second output string"
-        value: ${{ jobs.export-commit-sha.outputs.git_sha_short }}
+        description: "git commit sha (short)"
+        value: ${{ jobs.export-metadata.outputs.git_sha_short }}
+      git_commit_msg:
+        description: "git commit message"
+        value: ${{ jobs.export-metadata.outputs.git_commit_msg }}
 
 jobs:
   # Pre-Action Stage
-  export-commit-sha:
+  export-metadata:
     runs-on: ubuntu-latest
     steps:
       - name: Get HEAD git sha
@@ -27,13 +30,15 @@ jobs:
         run: |
           echo "git_sha_long=${{ github.sha }}" >> $GITHUB_OUTPUT
           echo "git_sha_short=$(echo ${{ github.sha }} | cut -c1-6)" >> $GITHUB_OUTPUT
+          echo "git_commit_msg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
 
     outputs:
       git_sha_long: ${{ steps.export_commit_sha.outputs.git_sha_long }}
       git_sha_short: ${{ steps.export_commit_sha.outputs.git_sha_short }}
+      git_commit_msg: ${{ steps.export_commit_sha.outputs.git_sha_msg }}
 
   notify-build-start:
-    needs: [export-commit-sha]
+    needs: [export-metadata]
     runs-on: ubuntu-latest
     steps:
       - name: Send telegram message on push
@@ -43,6 +48,6 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            🔨 ${{ github.actor }} pushed a new commit: ${{ needs.export-commit-sha.outputs.git_sha_short }} to [${{ github.repository }}](https://github.com/daeuniverse/container-estate) - [#${{ github.run_number }}](https://github.com/daeuniverse/container-estate/actions/runs/${{ github.run_id }})
+            🔨 ${{ github.actor }} pushed a new commit: ${{ needs.export-metadata.outputs.git_sha_short }} to [${{ github.repository }}](https://github.com/daeuniverse/container-estate) - [#${{ github.run_number }}](https://github.com/daeuniverse/container-estate/actions/runs/${{ github.run_id }})
 
-            [${{ needs.export-commit-sha.outputs.git_sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ github.event.head_commit.message }} by [${{ github.actor }}](https://http://github.com/yqlbu)
+            [${{ needs.export-metadata.outputs.git_sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ github.event.head_commit.message }} by [${{ github.actor }}](https://http://github.com/yqlbu)
