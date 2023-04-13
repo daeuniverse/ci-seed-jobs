@@ -38,7 +38,7 @@ jobs:
         with:
           repository: ${{ inputs.repository }}
           fetch-depth: ${{ inputs.fetch-depth }}
-          ref: ${{ inputs.repository }}
+          ref: ${{ inputs.ref }}
       - name: Get HEAD metadata
         id: export
         run: |
