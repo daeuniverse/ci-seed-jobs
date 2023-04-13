@@ -12,9 +12,6 @@ on:
     inputs:
       USER:
         required: true
-        type: string
-      USER:
-        required: true
       IMAGE_NAME:
         required: true
       SHA_SHORT:
