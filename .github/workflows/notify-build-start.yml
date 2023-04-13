@@ -32,16 +32,16 @@ jobs:
       git_sha_long: ${{ steps.export_commit_sha.outputs.git_sha_long }}
       git_sha_short: ${{ steps.export_commit_sha.outputs.git_sha_short }}
 
-  # notify-build-start:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Send telegram message on push
-  #       uses: appleboy/telegram-action@master
-  #       with:
-  #         to: ${{ secrets.TELEGRAM_TO }}
-  #         token: ${{ secrets.TELEGRAM_TOKEN }}
-  #         format: markdown
-  #         message: |
-  #           🔨 ${{ github.actor }} pushed a new commit: ${{ needs.export-commit-sha.outputs.git_sha_short }} to [${{ github.repository }}](https://github.com/daeuniverse/container-estate) - [#${{ github.run_number }}](https://github.com/daeuniverse/container-estate/actions/runs/${{ github.run_id }})
+  notify-build-start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          message: |
+            🔨 ${{ github.actor }} pushed a new commit: ${{ needs.export-commit-sha.outputs.git_sha_short }} to [${{ github.repository }}](https://github.com/daeuniverse/container-estate) - [#${{ github.run_number }}](https://github.com/daeuniverse/container-estate/actions/runs/${{ github.run_id }})
 
-  #           [${{ needs.export-commit-sha.outputs.git_sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ github.event.head_commit.message }} by [${{ github.actor }}](https://http://github.com/yqlbu)
+            [${{ needs.export-commit-sha.outputs.git_sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ github.event.head_commit.message }} by [${{ github.actor }}](https://http://github.com/yqlbu)
