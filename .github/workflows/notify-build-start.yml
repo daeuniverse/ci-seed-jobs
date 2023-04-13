@@ -35,7 +35,7 @@ jobs:
     outputs:
       git_sha_long: ${{ steps.export_commit_sha.outputs.git_sha_long }}
       git_sha_short: ${{ steps.export_commit_sha.outputs.git_sha_short }}
-      git_commit_msg: ${{ steps.export_commit_sha.outputs.git_sha_msg }}
+      git_commit_msg: ${{ steps.export_commit_sha.outputs.git_commit_msg }}
 
   notify-build-start:
     needs: [export-metadata]
