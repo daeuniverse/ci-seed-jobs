@@ -13,6 +13,9 @@ on:
       IMAGE_NAME:
         required: true
         type: string
+      IMAGE_TAG:
+        required: true
+        type: string
       SHA_SHORT:
         required: true
         type: string
@@ -31,6 +34,6 @@ jobs:
           message: |
             🏗 ${{ github.repository }}: Build #${{ github.run_number }} succeeded!
 
-            📦 Image URI: quay.io/${{ github.repository_owner }}/${{ inputs.IMAGE_NAME }}:${{ inputs.SHA_SHORT }}-${{ github.run_number }}
+            📦 Image URI: quay.io/${{ github.repository_owner }}/${{ inputs.IMAGE_NAME }}:${{ inputs.IMAGE_TAG }}
 
             🔨 Build Detail: [#${{ github.run_number }}](https://github.com/daeuniverse/container-estate/actions/runs/${{ github.run_id }})
