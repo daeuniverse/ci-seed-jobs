@@ -28,7 +28,6 @@ on:
 
 jobs:
   export-metadata:
-    id: export-metadata
     runs-on: ubuntu-latest
     outputs:
       git_sha_long: ${{ steps.export.outputs.git_sha_long }}
