@@ -25,12 +25,12 @@ jobs:
       - name: Get HEAD git sha
         id: export_commit_sha
         run: |
-          echo "sha_long=${{ github.sha }}" >> $GITHUB_OUTPUT
-          echo "sha_short=$(echo ${{ github.sha }} | cut -c1-6)" >> $GITHUB_OUTPUT
+          echo "git_sha_long=${{ github.sha }}" >> $GITHUB_OUTPUT
+          echo "git_sha_short=$(echo ${{ github.sha }} | cut -c1-6)" >> $GITHUB_OUTPUT
 
     outputs:
-      git_sha_long: ${{ steps.export_commit_sha.outputs.sha_long }}
-      git_sha_short: ${{ steps.export_commit_sha.outputs.sha_short }}
+      git_sha_long: ${{ steps.export_commit_sha.outputs.git_sha_long }}
+      git_sha_short: ${{ steps.export_commit_sha.outputs.git_sha_short }}
 
   notify-build-start:
     runs-on: ubuntu-latest
