@@ -3,13 +3,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  hello_world_job:
+  hello-world-job:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-      - uses: actions/checkout@v3
-      - id: foo
-        uses: daeuniverse/ci-seed-jobs@v1-beta
+      - uses: actions/checkout@master
+      - id: greet
+        # uses: daeuniverse/ci-seed-jobs@v1-beta
+        uses: ./test/hello-world
         with:
           who-to-greet: 'Mona the Octocat'
       - run: echo random-number ${{ steps.foo.outputs.random-number }}
