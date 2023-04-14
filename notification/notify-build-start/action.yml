@@ -9,6 +9,10 @@ secrets:
     required: true
 # Map input vars to job
 inputs:
+  telegram_to:
+    required: true
+  telegram_token:
+    required: true
   git_sha_long:
     required: true
     type: string
@@ -25,8 +29,8 @@ runs:
     - name: Send telegram message when build kicks off
       uses: appleboy/telegram-action@master
       with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
+        to: ${{ inputs.telegram_to }}
+        token: ${{ inputs.telegram_token }}
         format: markdown
         message: |
           🔨 ${{ github.actor }} pushed a new commit: ${{ inputs.git_sha_short }} to [${{ github.repository }}](https://github.com/daeuniverse/container-estate) - [#${{ github.run_number }}](https://github.com/daeuniverse/container-estate/actions/runs/${{ github.run_id }})
