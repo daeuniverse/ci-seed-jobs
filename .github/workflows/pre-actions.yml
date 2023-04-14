@@ -50,9 +50,11 @@ jobs:
   notify-build-start:
     runs-on: ubuntu-latest
     needs: [export-metadata]
-    name: A test job
     steps:
       - uses: actions/checkout@master
+        with:
+          repository: daeuniverse/ci-seed-jobs
+          ref: master
       - id: send-notification
         uses: ./notification/notify-build-start
         with:
