@@ -1,0 +1,40 @@
+---
+name: Post-Build Actions
+
+on:
+  workflow_call:
+    # Map input secrets to job
+    secrets:
+      TELEGRAM_TO:
+        required: true
+      TELEGRAM_TOKEN:
+        required: true
+    # Map input vars to job
+    inputs:
+      IMAGE_NAME:
+        required: true
+        type: string
+      IMAGE_TAG:
+        required: true
+        type: string
+      SHA_SHORT:
+        required: true
+        type: string
+
+jobs:
+  # Post-Action Stage
+  notify-build-result:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          repository: daeuniverse/ci-seed-jobs
+          ref: master
+      - id: send-notification
+        uses: ./notification/notify-build-start
+        with:
+          telegram_to: ${{ secrets.TELEGRAM_TO }}
+          telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
+          image_name: ${{ needs.IMAGE_NAME }}
+          image_tag: ${{ inputs.IMAGE_TAG }}
+          sha_short: ${{ inputs.SHA_SHORT }}

@@ -1,0 +1,42 @@
+---
+name: Notify build result
+description: Send notification to Telegram channel to notify build result
+# Map input secrets to job
+secrets:
+  TELEGRAM_TO:
+    required: true
+  TELEGRAM_TOKEN:
+    required: true
+# Map input vars to job
+inputs:
+  telegram_to:
+    required: true
+    type: string
+  telegram_token:
+    required: true
+    type: string
+  image_name:
+    required: true
+    type: string
+  image_tag:
+    required: true
+    type: string
+  image_short:
+    required: true
+    type: string
+
+runs:
+  using: composite
+  steps:
+    - name: Send telegram message when build finishes
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ inputs.telegram_to }}
+        token: ${{ inputs.telegram_token }}
+        format: markdown
+        message: |
+          🏗 ${{ github.repository }}(${{ inputs.SHA_SHORT }}): Build #${{ github.run_number }} succeeded!
+
+          📦 Image URI: quay.io/${{ github.repository_owner }}/${{ inputs.IMAGE_NAME }}:${{ inputs.IMAGE_TAG }}
+
+          🔨 Build Detail: [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
