@@ -13,3 +13,5 @@ jobs:
         uses: ./notification/notify-test
         with:
           msg: "hello"
+          telegram_to: ${{ secrets.TELEGRAM_TO }}
+          telegram_secret: ${{ secrets.TELEGRAM_SECRET }}
