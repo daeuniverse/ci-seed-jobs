@@ -5,6 +5,12 @@ on:
   workflow_call:
     # Map input vars to job
     inputs:
+      telegram_to:
+        required: true
+        type: string
+      telegram_token:
+        required: true
+        type: string
       repository:
         required: true
         type: string
@@ -58,8 +64,8 @@ jobs:
       - id: send-notification
         uses: ./notification/notify-build-start
         with:
-          telegram_to: ${{ secrets.TELEGRAM_TO }}
-          telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
+          telegram_to: ${{ inputs.TELEGRAM_TO }}
+          telegram_token: ${{ inputs.TELEGRAM_TOKEN }}
           git_sha_long: ${{ needs.export-metadata.outputs.git_sha_long }}
           git_sha_short: ${{ needs.export-metadata.outputs.git_sha_short }}
           git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
