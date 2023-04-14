@@ -1,0 +1,15 @@
+---
+name: Test
+on:
+  workflow_dispatch:
+
+jobs:
+  hello-world-job:
+    runs-on: ubuntu-latest
+    name: A test job
+    steps:
+      - uses: actions/checkout@master
+      - id: send-notification
+        uses: ./notification/notify-test
+        with:
+          msg: "hello"

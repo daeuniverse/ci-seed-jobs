@@ -1,0 +1,27 @@
+---
+name: Notify test
+description: Send notification to Telegram channel with custom message
+# Map input secrets to job
+secrets:
+  TELEGRAM_TO:
+    required: true
+  TELEGRAM_TOKEN:
+    required: true
+# Map input vars to job
+inputs:
+  msg:
+    required: true
+    type: string
+
+runs:
+  using: composite
+  steps:
+    - name: Send telegram message when build kicks off
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        format: markdown
+        message: |
+          Hello from GitHub Actions with msg: ${{ inputs.msg }}
+
