@@ -31,7 +31,7 @@ jobs:
           repository: daeuniverse/ci-seed-jobs
           ref: master
       - id: send-notification
-        uses: ./notification/notify-build-start
+        uses: ./notification/notify-build-result
         with:
           telegram_to: ${{ secrets.TELEGRAM_TO }}
           telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
