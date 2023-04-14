@@ -14,4 +14,4 @@ jobs:
         with:
           msg: "hello"
           telegram_to: ${{ secrets.TELEGRAM_TO }}
-          telegram_secret: ${{ secrets.TELEGRAM_SECRET }}
+          telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
