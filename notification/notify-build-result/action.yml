@@ -21,7 +21,7 @@ inputs:
   image_tag:
     required: true
     type: string
-  image_short:
+  sha_short:
     required: true
     type: string
 
@@ -35,8 +35,8 @@ runs:
         token: ${{ inputs.telegram_token }}
         format: markdown
         message: |
-          🏗 ${{ github.repository }}(${{ inputs.SHA_SHORT }}): Build #${{ github.run_number }} succeeded!
+          🏗 ${{ github.repository }}(${{ inputs.image_short }}): Build #${{ github.run_number }} succeeded!
 
-          📦 Image URI: quay.io/${{ github.repository_owner }}/${{ inputs.IMAGE_NAME }}:${{ inputs.IMAGE_TAG }}
+          📦 Image URI: quay.io/${{ github.repository_owner }}/${{ inputs.image_name }}:${{ inputs.image_tag }}
 
           🔨 Build Detail: [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})

@@ -22,7 +22,6 @@ on:
         type: string
 
 jobs:
-  # Post-Action Stage
   notify-build-result:
     runs-on: ubuntu-latest
     steps:
