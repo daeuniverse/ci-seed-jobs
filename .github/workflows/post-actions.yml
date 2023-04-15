@@ -11,9 +11,6 @@ on:
         required: true
     # Map input vars to job
     inputs:
-      image_name:
-        required: true
-        type: string
       image_tag:
         required: true
         type: string
@@ -34,6 +31,5 @@ jobs:
         with:
           telegram_to: ${{ secrets.TELEGRAM_TO }}
           telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
-          image_name: ${{ needs.image_name }}
           image_tag: ${{ inputs.image_tag }}
           sha_short: ${{ inputs.sha_short }}
