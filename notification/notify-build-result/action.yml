@@ -1,12 +1,6 @@
 ---
 name: Notify build result
 description: Send notification to Telegram channel to notify build result
-# Map input secrets to job
-secrets:
-  TELEGRAM_TO:
-    required: true
-  TELEGRAM_TOKEN:
-    required: true
 # Map input vars to job
 inputs:
   telegram_to:
