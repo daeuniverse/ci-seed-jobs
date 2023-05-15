@@ -27,7 +27,7 @@ runs:
         token: ${{ inputs.telegram_token }}
         format: markdown
         message: |
-          🔨 ${{ github.actor }} pushed a new commit: ${{ inputs.git_sha_short }} to [${{ github.repository }}](https://github.com/daeuniverse/container-estate) - [#${{ github.run_number }}](https://github.com/daeuniverse/container-estate/actions/runs/${{ github.run_id }})
+          🔨 ${{ github.actor }} pushed a new commit: ${{ inputs.git_sha_short }} to [${{ github.repository }}](https://github.com/${{ github.repository }}) - [#${{ github.run_number }}](https://github.com/daeuniverse/${{ github.repository }}/actions/runs/${{ github.run_id }})
 
           [${{ inputs.git_sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ inputs.git_commit_msg }} by [${{ github.actor }}](https://http://github.com/yqlbu)
 
