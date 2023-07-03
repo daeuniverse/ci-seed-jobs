@@ -26,6 +26,7 @@ runs:
         to: ${{ inputs.telegram_to }}
         token: ${{ inputs.telegram_token }}
         format: markdown
+        disable_web_page_preview: true
         message: |
           🔨 ${{ github.actor }} pushed a new commit: ${{ inputs.git_sha_short }} to [${{ github.repository }}](https://github.com/${{ github.repository }}) - [#${{ github.run_number }}](https://github.com/daeuniverse/${{ github.repository }}/actions/runs/${{ github.run_id }})
 
