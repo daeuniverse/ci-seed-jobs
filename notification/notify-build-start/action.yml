@@ -34,4 +34,4 @@ runs:
 
           [${{ inputs.git_sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ inputs.git_commit_msg }} by [@${{ github.actor }}](https://github.com/${{ github.actor }})
 
-          Workflow: ${{ github.workflow }} has kicked off.
+          Workflow: [${{ github.workflow }} - #${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) has kicked off.
