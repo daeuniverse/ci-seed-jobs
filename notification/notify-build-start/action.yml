@@ -3,6 +3,8 @@ name: Notify build start
 description: Send notification to Telegram channel to notify build has started
 # Map input vars to job
 inputs:
+  workflow_name:
+    required: false
   telegram_to:
     required: true
   telegram_token:
@@ -28,7 +30,8 @@ runs:
         format: markdown
         disable_web_page_preview: true
         message: |
-          🔨 ${{ github.actor }} pushed a new commit: ${{ inputs.git_sha_short }} to [${{ github.repository }}](https://github.com/${{ github.repository }}) - [#${{ github.run_number }}](https://github.com/daeuniverse/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          🔨 A new commit: ${{ inputs.git_sha_short }} was pushed to [${{ github.repository }}](https://github.com/${{ github.repository }});
 
-          [${{ inputs.git_sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ inputs.git_commit_msg }} by [${{ github.actor }}](https://http://github.com/yqlbu)
+          [${{ inputs.git_sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ inputs.git_commit_msg }} by @[${{ github.actor }}](https://http://github.com/${{ github.actor }})
 
+          Workflow: ${{ github.workflow }} has kicked off.
