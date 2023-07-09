@@ -32,6 +32,6 @@ runs:
         message: |
           🔨 A new commit: ${{ inputs.git_sha_short }} was pushed to [${{ github.repository }}](https://github.com/${{ github.repository }})
 
-          [${{ inputs.git_sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ inputs.git_commit_msg }} by [@${{ github.actor }}](https://http://github.com/${{ github.actor }})
+          [${{ inputs.git_sha_short }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ inputs.git_commit_msg }} by [${{ github.actor }}](https://http://github.com/${{ github.actor }})
 
           Workflow: ${{ github.workflow }} has kicked off.
