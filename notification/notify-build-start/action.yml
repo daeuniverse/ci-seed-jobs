@@ -1,10 +1,7 @@
 ---
 name: Notify build start
 description: Send notification to Telegram channel to notify build has started
-# Map input vars to job
 inputs:
-  workflow_name:
-    required: false
   telegram_to:
     required: true
   telegram_token:
