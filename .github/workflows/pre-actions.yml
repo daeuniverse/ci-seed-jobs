@@ -34,6 +34,15 @@ on:
         value: ${{ jobs.export-metadata.outputs.git_commit_msg }}
 
 jobs:
+  export-github-context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+          
   export-metadata:
     runs-on: ubuntu-latest
     outputs:
