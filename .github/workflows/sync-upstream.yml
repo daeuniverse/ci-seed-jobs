@@ -5,15 +5,12 @@ on:
     inputs:
       source-head:
         type: string
-        required: true
         default: main
       sync-message:
         type: string
-        required: true
         default: "chore(sync): keep submodules up-to-date"
       pr-branch:
         type: string
-        required: true
         default: sync-upstream
       submodule-name:
         type: string
