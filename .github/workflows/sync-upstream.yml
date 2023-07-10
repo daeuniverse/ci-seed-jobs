@@ -1,0 +1,45 @@
+name: Synchronize Upstream
+
+on:
+  workflow_call:
+    inputs:
+      source-head:
+        type: string
+        required: true
+        default: main
+      sync-message:
+        type: string
+        required: true
+        default: "chore(sync): keep submodules up-to-date"
+      pr-branch:
+        type: string
+        required: true
+        default: sync-upstream
+      submodule-name:
+        type: string
+        required: true
+
+jobs:
+  sync-upstream:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.source-head }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          ref: main
+
+      - name: Sync upstream
+        run: |
+          git checkout origin/${{ inputs.source-head }}
+        working-directory: ${{ inputs.submodule-name }}
+
+      - name: Commit changes
+        run: |
+          git config user.name "daebot"
+          git config user.email "daebot@v2raya.org"
+          git checkout -b ${{ inputs.pr-branch }}
+          git add .
+          git commit -m "${{ inputs.sync-message }}" --no-verify
+          git push -u origin ${{ inputs.pr-branch }}
