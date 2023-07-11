@@ -45,5 +45,4 @@ jobs:
           git checkout -B ${{ inputs.pr-branch }}     
           git add .
           git commit -m "${{ inputs.sync-message }}" --no-verify
-          git pull origin ${{ inputs.pr-branch }} --rebase
           git push -u origin ${{ inputs.pr-branch }}
