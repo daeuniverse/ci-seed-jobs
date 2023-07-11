@@ -17,6 +17,11 @@ jobs:
   generate-token:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
+        with:
+          repository: daeuniverse/ci-seed-jobs
+          ref: master
+          
 #       - name: Generate an auth token
 #         id: generate_token
 #         uses: tibdex/github-app-token@v1.8
