@@ -22,7 +22,7 @@ jobs:
   generate-token:
     runs-on: ubuntu-latest
     outputs:
-      git_sha_long: ${{ steps.generate_token.outputs.token }}
+      token: ${{ steps.generate_token.outputs.token }}
     steps:
       - name: Generate an auth token
         id: generate_token
