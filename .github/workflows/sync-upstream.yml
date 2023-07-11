@@ -37,7 +37,7 @@ jobs:
           git config user.name "daebot"
           git config user.email "daebot@v2raya.org"
           # git checkout -b ${{ inputs.pr-branch }}
-          git switch -c origin/${{ inputs.source-head }}
+          git switch -c ${{ inputs.source-head }}
           git add .
           git commit -m "${{ inputs.sync-message }}" --no-verify
           git push -u origin ${{ inputs.pr-branch }}
