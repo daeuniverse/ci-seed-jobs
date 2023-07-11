@@ -17,6 +17,7 @@ on:
 jobs:
   generate-auth-token:
     uses: daeuniverse/ci-seed-jobs/.github/workflows/generate-auth-token.yml@master
+    secrets: inherit
     
   report-build-result:
     needs: [generate-auth-token]
