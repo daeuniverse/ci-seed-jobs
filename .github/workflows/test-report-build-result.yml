@@ -15,14 +15,18 @@ on:
 #         default: ok!
         
 jobs:
+  generate-auth-token:
+    uses: daeuniverse/ci-seed-jobs/.github/workflows/generate-auth-token.yml@master
+    
   report-build-result:
+    needs: [generate-auth-token]
     runs-on: ubuntu-latest
     steps:
       # https://github.com/dflydev/check-runs-action
       - name: Prepare Check Runs
         uses: dflydev/check-runs-action@v1
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ needs.generate-auth-token.outputs.token }}
           checks: |
             [
               { "id": "phpunit", "name": "PHPUnit" },
