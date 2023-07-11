@@ -3,27 +3,33 @@ name: Test Report Build Result
 
 on:
   workflow_dispatch:
-    inputs:
-      job_result:
-        required: true
-        type: string
-      checkrun_name:
-        required: true
-        type: string
-      summary:
-        type: string
-        default: ok!
+#     inputs:
+#       job_result:
+#         required: true
+#         type: string
+#       checkrun_name:
+#         required: true
+#         type: string
+#       summary:
+#         type: string
+#         default: ok!
         
 jobs:
   report-build-result:
     runs-on: ubuntu-latest
     steps:
-      # https://github.com/LouisBrunner/checks-action
-      - uses: LouisBrunner/checks-action@v1.6.1
-        if: always()
+      # https://github.com/dflydev/check-runs-action
+      - name: Prepare Check Runs
+        uses: dflydev/check-runs-action@v1
         with:
           token: ${{ secrets.GH_TOKEN }}
-          name: ${{ inputs.checkrun_name }}
-          conclusion: ${{ inputs.job_result }}
-          output: |
-            {"summary":"${{ inputs.summary }}"}
+          checks: |
+            [
+              { "id": "phpunit", "name": "PHPUnit" },
+              { "id": "psalm", "name": "Psalm" },
+              { "id": "phpcs", "name": "PHP_CodeSniffer" },
+              { "id": "eslint", "name": "ESLint" },
+              { "id": "assets", "name": "npm run production" },
+              { "id": "dusk", "name": "Dusk" }
+            ]
+          status: "queued"
