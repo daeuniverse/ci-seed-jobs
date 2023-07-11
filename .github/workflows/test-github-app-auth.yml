@@ -31,6 +31,9 @@ jobs:
       - name: Generate auth token
         id: send-generate_token
         uses: ./github/generate-auth-token
+        with:
+          app_id: ${{ secrets.GH_APP_ID }}
+          private_key: ${{ secrets.GH_PRIVATE_KEY }}
         
       - name: Use the token
         env:
