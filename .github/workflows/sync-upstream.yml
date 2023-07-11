@@ -36,7 +36,6 @@ jobs:
         if: ${{ github.repository == 'daeuniverse/dae-wing' }}
         run: |
           go mod tidy
-        working-directory: ${{ inputs.submodule-name }}
 
       - name: Commit changes
         run: |
