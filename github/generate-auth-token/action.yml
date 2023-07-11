@@ -11,6 +11,14 @@
 name: Generate GitHub Auth Token
 description: "auth token generated from GitHub App"
 
+inputs:
+  app_id:
+    description: 'GitHub App Id'
+    required: true
+  private_key:
+    description: "GitHub App private key"
+    required: true
+
 runs:
   using: composite
   steps:
@@ -18,5 +26,5 @@ runs:
       id: generate_token
       uses: tibdex/github-app-token@v1.8
       with:
-        app_id: ${{ secrets.GH_APP_ID }}
-        private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+        app_id: ${{ inputs.GH_APP_ID }}
+        private_key: ${{ inputs.GH_APP_PRIVATE_KEY }}
