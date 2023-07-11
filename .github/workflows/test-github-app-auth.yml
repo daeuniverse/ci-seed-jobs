@@ -12,18 +12,25 @@ name: Test GitHub App Auth
 
 on:
   workflow_dispatch:
+  workflow_call:
+    outputs:
+      token:
+        description: "auth token generated from GitHub App"
+        value: ${{ jobs.generate-token.outputs.token }}
 
 jobs:
-  demo_app_authentication:
+  generate-token:
     runs-on: ubuntu-latest
+    outputs:
+      git_sha_long: ${{ steps.generate_token.outputs.token }}
     steps:
-      - name: Generate a token
+      - name: Generate an auth token
         id: generate_token
         uses: tibdex/github-app-token@main
         with:
           app_id: ${{ secrets.GH_APP_ID }}
           private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-
+        
       - name: Use the token
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
