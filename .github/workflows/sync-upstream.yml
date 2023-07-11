@@ -36,8 +36,8 @@ jobs:
         run: |
           git config user.name "daebot"
           git config user.email "daebot@v2raya.org"
-          git pull
-          git checkout -B ${{ inputs.pr-branch }}
+          git checkout -B ${{ inputs.pr-branch }}     
           git add .
           git commit -m "${{ inputs.sync-message }}" --no-verify
+          git pull --rebase
           git push -u origin ${{ inputs.pr-branch }}
