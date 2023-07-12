@@ -33,7 +33,7 @@ runs:
             [
               { "id": "checkout-full-src", "name": "checkout-full-src" },
               { "id": "build-web", "name": "build-web" },
-              { "id": "build-bundle", "name": "build-bundle" },
+              { "id": "build-bundle", "name": "build-bundle" }
             ]
           status: queued
               # { "id": "checkout-full-src", "name": "dae-bot[bot]/checkout-full-src" },
