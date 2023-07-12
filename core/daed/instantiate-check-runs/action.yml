@@ -1,6 +1,14 @@
 name: Instantiate Check-Runs
 description: "instantiate required check-runs"
 
+inputs:
+  app_id:
+    type: string
+    description: "GitHub App Id"
+  app_private_key:
+    type: string
+    description: "GitHub App Private Key"
+
 runs:
   using: composite
   steps:
@@ -13,8 +21,8 @@ runs:
         id: generate_token
         uses: ./github/generate-auth-token
         with:
-          app_id: ${{ secrets.GH_APP_ID }}
-          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          app_id: ${{ inputs.app_id }}
+          private_key: ${{ inputs.private_key }}
 
       # https://github.com/dflydev/check-runs-action
       - name: Prepare Check Runs
