@@ -1,0 +1,29 @@
+---
+name: Report Build Result
+
+on:
+  workflow_call:
+    inputs:
+      job_result:
+        required: true
+        type: string
+      checkrun_name:
+        required: true
+        type: string
+      summary:
+        type: string
+        default: ok!
+        
+jobs:
+  report-build-result:
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/LouisBrunner/checks-action
+      - uses: LouisBrunner/checks-action@v1.6.1
+        if: always()
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          name: ${{ inputs.checkrun_name }}
+          conclusion: ${{ inputs.job_result }}
+          output: |
+            {"summary":"${{ inputs.summary }}"}
