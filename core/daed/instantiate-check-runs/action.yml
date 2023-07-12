@@ -31,8 +31,11 @@ runs:
           token: ${{ steps.generate_token.outputs.token }}
           checks: |
             [
-              { "id": "checkout-full-src", "name": "dae-bot[bot]/checkout-full-src" },
-              { "id": "build-web", "name": "dae-bot[bot]/build-web" },
-              { "id": "build-bundle", "name": "dae-bot[bot]/build-bundle" },
+              # { "id": "checkout-full-src", "name": "dae-bot[bot]/checkout-full-src" },
+              # { "id": "build-web", "name": "dae-bot[bot]/build-web" },
+              # { "id": "build-bundle", "name": "dae-bot[bot]/build-bundle" },
+              { "id": "checkout-full-src", "name": "checkout-full-src" },
+              { "id": "build-web", "name": "build-web" },
+              { "id": "build-bundle", "name": "build-bundle" },
             ]
           status: queued
