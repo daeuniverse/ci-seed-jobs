@@ -1,0 +1,34 @@
+---
+name: Instantiate Check-Runs 
+
+on:
+  workflow_call:
+        
+jobs:
+  report-build-result:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          repository: daeuniverse/ci-seed-jobs
+          ref: master
+
+      - name: Generate auth token
+        id: generate_token
+        uses: ./github/generate-auth-token
+        with:
+          app_id: ${{ secrets.GH_APP_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+      # https://github.com/dflydev/check-runs-action
+      - name: Prepare Check Runs
+        uses: dflydev/check-runs-action@v1
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          checks: |
+            [
+              { "id": "checkout-full-src", "name": "dae-bot[bot]/checkout-full-src" },
+              { "id": "build-web", "name": "dae-bot[bot]/build-web" },
+              { "id": "build-bundle", "name": "dae-bot[bot]/build-bundle" },
+            ]
+          status: queued
