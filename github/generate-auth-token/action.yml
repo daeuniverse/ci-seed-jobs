@@ -19,6 +19,11 @@ inputs:
     description: "GitHub App private key"
     required: true
 
+outputs:
+  token:
+    description: "auth token generated from GitHub App"
+    value: ${{ steps.generate_token.outputs.token }}
+
 runs:
   using: composite
   steps:
