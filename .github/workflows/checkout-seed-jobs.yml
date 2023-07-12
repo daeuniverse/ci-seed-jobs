@@ -11,3 +11,4 @@ jobs:
         with:
           repository: daeuniverse/ci-seed-jobs
           ref: master
+          path: .github/seed-jobs
