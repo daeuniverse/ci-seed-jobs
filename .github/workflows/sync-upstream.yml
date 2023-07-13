@@ -51,6 +51,7 @@ jobs:
           
           git config user.name "daebot"
           git config user.email "daebot@v2raya.org"
+          git checkout -B ${{ inputs.pr-branch }}
           git add .
           git commit -m "${{ inputs.sync-message }}" --no-verify
           if [[ "${{ steps.check_remote_branch.outputs.stdout }}" != '' ]]; then
