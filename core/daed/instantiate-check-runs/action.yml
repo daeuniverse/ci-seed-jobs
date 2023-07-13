@@ -24,9 +24,9 @@ runs:
           app_id: ${{ inputs.app_id }}
           private_key: ${{ inputs.private_key }}
 
-      # https://github.com/dflydev/check-runs-action
+      # https://github.com/daeuniverse/check-runs-action
       - name: Prepare Check Runs
-        uses: dflydev/check-runs-action@v1
+        uses: daeuniverse/check-runs-action@master
         with:
           token: ${{ steps.generate_token.outputs.token }}
           checks: |
