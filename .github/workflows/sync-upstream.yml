@@ -46,6 +46,10 @@ jobs:
       - name: Pull changes if remote branch exists
         if: ${{ steps.check_remote_branch.outputs.stdout != '' }}
         run: |
+          #!/bin/bash
+          
+          set -ex
+          
           git config user.name "daebot"
           git config user.email "daebot@v2raya.org"
           git add .
