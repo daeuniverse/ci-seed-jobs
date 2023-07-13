@@ -39,9 +39,15 @@ jobs:
           go mod tidy
           
       - name: Check if ${{ inputs.pr-branch }} exists in remote
+        id: check_remote_branch
         run: |
-          git ls-remote --heads origin ${{ inputs.pr-branch }}
+          echo "stdout=$(git ls-remote --heads origin ${{ inputs.pr-branch }})" >> $GITHUB_OUTPUT
 
+      - name: Pull changes if remote branch exists
+        if: ${{ steps.check_remote_branch.outputs.stdout != '' }}
+        run: |
+          git pull origin ${{ inputs.pr-branch }} --rebase
+          
 #       - name: Commit changes
 #         run: |
 #           git config user.name "daebot"
@@ -49,5 +55,4 @@ jobs:
 #           git checkout -B ${{ inputs.pr-branch }}     
 #           git add .
 #           git commit -m "${{ inputs.sync-message }}" --no-verify
-#           git pull origin ${{ inputs.pr-branch }} --rebase
 #           git push -u origin ${{ inputs.pr-branch }}
