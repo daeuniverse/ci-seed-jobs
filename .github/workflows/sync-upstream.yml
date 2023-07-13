@@ -37,13 +37,17 @@ jobs:
         if: ${{ github.repository == 'daeuniverse/dae-wing' }}
         run: |
           go mod tidy
-
-      - name: Commit changes
+          
+      - name: Check if ${{ pr-branch }} exists in remote
         run: |
-          git config user.name "daebot"
-          git config user.email "daebot@v2raya.org"
-          git checkout -B ${{ inputs.pr-branch }}     
-          git add .
-          git commit -m "${{ inputs.sync-message }}" --no-verify
-          git pull origin ${{ inputs.pr-branch }} --rebase
-          git push -u origin ${{ inputs.pr-branch }}
+          git ls-remote --heads origin ${{ pr-branch }}
+
+#       - name: Commit changes
+#         run: |
+#           git config user.name "daebot"
+#           git config user.email "daebot@v2raya.org"
+#           git checkout -B ${{ inputs.pr-branch }}     
+#           git add .
+#           git commit -m "${{ inputs.sync-message }}" --no-verify
+#           git pull origin ${{ inputs.pr-branch }} --rebase
+#           git push -u origin ${{ inputs.pr-branch }}
