@@ -38,9 +38,9 @@ jobs:
         run: |
           go mod tidy
           
-      - name: Check if ${{ pr-branch }} exists in remote
+      - name: Check if ${{ inputs.pr-branch }} exists in remote
         run: |
-          git ls-remote --heads origin ${{ pr-branch }}
+          git ls-remote --heads origin ${{ inputs.pr-branch }}
 
 #       - name: Commit changes
 #         run: |
