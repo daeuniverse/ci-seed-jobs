@@ -35,6 +35,6 @@ runs:
         uses: dflydev/check-runs-action@v1
         with:
           token: ${{ steps.generate_token.outputs.token }}
-          id: ${{ inputs.id }}
+          id: "${{ inputs.id }}"
           conclusion: ${{ inputs.conclusion }}
 
