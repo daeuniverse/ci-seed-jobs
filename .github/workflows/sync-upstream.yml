@@ -46,7 +46,11 @@ jobs:
       - name: Pull changes if remote branch exists
         if: ${{ steps.check_remote_branch.outputs.stdout != '' }}
         run: |
-          git pull origin ${{ inputs.pr-branch }} --rebase
+          git add .
+          git commit -m "${{ inputs.sync-message }}" --no-verify
+          if [[ "${{ steps.check_remote_branch.outputs.stdout }}" != '' ]]; then
+            git pull origin ${{ inputs.pr-branch }} --rebase
+          fi
           
 #       - name: Commit changes
 #         run: |
