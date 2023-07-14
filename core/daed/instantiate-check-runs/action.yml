@@ -1,5 +1,5 @@
-name: Instantiate Check-Runs
-description: "instantiate required check-runs"
+name: Instantiate Check Run (${{ inputs.id }})
+description: "instantiate required check-run with given id"
 
 inputs:
   app_id:
@@ -8,6 +8,9 @@ inputs:
   private_key:
     type: string
     description: "GitHub App Private Key"
+  id:
+    type: string
+    description: "name of the check run"
 
 runs:
   using: composite
@@ -24,16 +27,11 @@ runs:
           app_id: ${{ inputs.app_id }}
           private_key: ${{ inputs.private_key }}
 
-      # https://github.com/daeuniverse/check-runs-action
-      - name: Prepare Check Runs
-        uses: daeuniverse/check-runs-action@master
+      # https://github.com/LouisBrunner/checks-action
+      - name: Report check run
+        uses: LouisBrunner/checks-action@v1.6.1
+        if: always()
         with:
           token: ${{ steps.generate_token.outputs.token }}
-          checks: |
-            [
-              { "id": "checkout-full-src", "name": "dae-bot[bot]/checkout-full-src" },
-              { "id": "build-web", "name": "dae-bot[bot]/build-web" },
-              { "id": "build-bundle", "name": "dae-bot[bot]/build-bundle" }
-            ]
+          name: ${{ inputs.id }}
           status: queued
-
