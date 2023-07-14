@@ -31,11 +31,17 @@ runs:
           private_key: ${{ inputs.private_key }}
 
       # https://github.com/daeuniverse/check-runs-action
+      # - name: Report check run
+        # uses: daeuniverse/check-runs-action@master
+        # with:
+        #   token: ${{ steps.generate_token.outputs.token }}
+        #   id: ${{ inputs.id }}
+        #   name: ${{ inputs.id }}
+        #   conclusion: ${{ inputs.conclusion }}
       - name: Report check run
-        uses: daeuniverse/check-runs-action@master
+        uses: LouisBrunner/checks-action@v1.6.1
+        if: always()
         with:
           token: ${{ steps.generate_token.outputs.token }}
-          id: ${{ inputs.id }}
           name: ${{ inputs.id }}
-          conclusion: ${{ inputs.conclusion }}
-
+          conclusion: ${{ job.status }}
