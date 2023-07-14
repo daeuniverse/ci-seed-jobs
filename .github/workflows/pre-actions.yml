@@ -82,7 +82,7 @@ jobs:
           git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
           
   instantiate-check-runs:
-    if: ${{ inputs.check-runs == 'true' }}
+    if: ${{ inputs.check-runs == true }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
