@@ -11,7 +11,7 @@ on:
         description: "conclusion of the check run"
 
 jobs:
-  sync-upstream:
+  report-workflow-run:
     runs-on: ubuntu-latest
     if: ${{ inputs.source-head }}
     steps:
