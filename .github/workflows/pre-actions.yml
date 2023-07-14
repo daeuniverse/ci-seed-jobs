@@ -86,7 +86,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        id: ["build", "main-build-passed"]
+        id: ["build", "pr-build-passed"]
     steps:
       - name: Instantiate required check runs
         uses: daeuniverse/ci-seed-jobs/common/instantiate-check-runs@master
