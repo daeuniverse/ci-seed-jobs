@@ -21,6 +21,8 @@ on:
         required: false
         default: 0
         type: string
+      instantiate-check-run:
+        type: boolean
     # Map the workflow outputs to job outputs
     outputs:
       git_sha_long:
@@ -78,3 +80,17 @@ jobs:
           git_sha_long: ${{ needs.export-metadata.outputs.git_sha_long }}
           git_sha_short: ${{ needs.export-metadata.outputs.git_sha_short }}
           git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
+          
+  instantiate-check-runs:
+    if: ${{ inputs.instantiate-check-run == 'true' }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        id: ["build", "main-build-passed"]
+    steps:
+      - name: Instantiate required check runs
+        uses: daeuniverse/ci-seed-jobs/common/instantiate-check-runs@master
+        with:
+          app_id: ${{ secrets.GH_APP_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          id: "dae-bot[bot]/${{ matrix.id }}"
