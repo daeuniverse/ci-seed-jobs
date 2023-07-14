@@ -11,7 +11,7 @@ inputs:
   id:
     type: string
     description: "name of the check run"
-  conclusion::
+  conclusion:
     type: string
     descript: "conclusion of the check run"
 
