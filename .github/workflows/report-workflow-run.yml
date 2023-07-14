@@ -13,7 +13,6 @@ on:
 jobs:
   report-workflow-run:
     runs-on: ubuntu-latest
-    if: ${{ inputs.source-head }}
     steps:
       - uses: actions/checkout@master
         with:
