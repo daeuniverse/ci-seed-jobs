@@ -23,7 +23,7 @@ jobs:
           ref: master
 
       - name: Report workflow run status
-        uses: ./common/report-workflow-run@master
+        uses: ./common/report-workflow-run
         with:
           app_id: ${{ secrets.GH_APP_ID }}
           private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
