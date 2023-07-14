@@ -1,0 +1,31 @@
+---
+name: Post-Build Actions
+
+on:
+  workflow_call:
+    inputs:
+      check_run_id:
+        type: string
+        description: "name of the check run"
+        required: true
+      conclusion:
+        type: string
+        description: "workflow run status (success|failure|skipped|aborted)"
+        required: true
+
+jobs:
+  report-workflow-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          repository: daeuniverse/ci-seed-jobs
+          ref: master
+
+      - id: send-notification
+        uses: ./common/report-workflow-run@master
+        with:
+          app_id: ${{ secrets.GH_APP_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          id: ${{ inputs.check-run-id }}
+          conclusion: ${{ inputs.conclusion }}
