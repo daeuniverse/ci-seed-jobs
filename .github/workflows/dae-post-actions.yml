@@ -4,11 +4,11 @@ name: Post-Build Actions
 on:
   workflow_call:
     inputs:
-      check_run_id:
+      check-run-id:
         type: string
         description: "name of the check run"
         required: true
-      conclusion:
+      check-run-conclusion:
         type: string
         description: "workflow run status (success|failure|skipped|aborted)"
         required: true
