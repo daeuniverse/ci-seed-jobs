@@ -16,7 +16,9 @@ on:
         default: 0
         type: string
       check-runs:
-        type: boolean
+        type: string
+        required: false
+        default: "[]"
     # Map the workflow outputs to job outputs
     outputs:
       git_sha_long:
@@ -29,7 +31,19 @@ on:
         description: "git commit message"
         value: ${{ jobs.export-metadata.outputs.git_commit_msg }}
 
-jobs:
+jobs:    
+  set-vars:
+    runs-on: ubuntu-latest
+    outputs:
+      check-runs-matrix: ${{ steps.set-check-runs-matrix.outputs.check-runs-matrix }}
+    steps:
+      - name: Set check-runs matrix
+        id: set-check-runs-matrix
+        run: |
+          echo "check-runs-matrix=$input" >> $GITHUB_OUTPUT
+        env:
+          input: ${{ inputs.check-runs }}
+
   export-github-context:
     runs-on: ubuntu-latest
     steps:
@@ -76,12 +90,14 @@ jobs:
           git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
           
   instantiate-check-runs:
-    needs: [export-github-context, export-metadata]
-    if: ${{ inputs.check-runs == true }}
+    needs: [set-vars,export-github-context, export-metadata]
+    if: ${{ inputs.check-runs != '[]' }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        id: ["build", "pr-build-passed"]
+#         id: ["build", "pr-build-passed"]
+        id: ${{ fromJson(needs.set-vars.outputs.check-runs-matrix) }}
     steps:
       - name: Instantiate required check runs
         uses: daeuniverse/ci-seed-jobs/common/instantiate-check-runs@master
