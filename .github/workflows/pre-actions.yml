@@ -3,12 +3,6 @@ name: Pre-Build Actions
 
 on:
   workflow_call:
-    # Map input secrets to job
-    secrets:
-      TELEGRAM_TO:
-        required: true
-      TELEGRAM_TOKEN:
-        required: true
     # Map input vars to job
     inputs:
       repository:
