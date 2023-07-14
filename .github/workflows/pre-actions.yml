@@ -76,6 +76,7 @@ jobs:
           git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
           
   instantiate-check-runs:
+    needs: [export-github-context, export-metadata]
     if: ${{ inputs.check-runs == true }}
     runs-on: ubuntu-latest
     strategy:
