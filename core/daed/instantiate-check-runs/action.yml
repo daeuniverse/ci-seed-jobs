@@ -1,4 +1,4 @@
-name: Instantiate Check Run (${{ inputs.id }})
+name: Instantiate Check Run
 description: "instantiate required check-run with given id"
 
 inputs:
