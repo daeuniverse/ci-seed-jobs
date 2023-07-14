@@ -21,7 +21,7 @@ on:
         required: false
         default: 0
         type: string
-      instantiate-check-run:
+      check-runs:
         type: boolean
     # Map the workflow outputs to job outputs
     outputs:
@@ -82,7 +82,7 @@ jobs:
           git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
           
   instantiate-check-runs:
-    if: ${{ inputs.instantiate-check-run == 'true' }}
+    if: ${{ inputs.check-runs == 'true' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
