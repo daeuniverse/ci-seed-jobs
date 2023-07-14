@@ -90,13 +90,12 @@ jobs:
           git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
           
   instantiate-check-runs:
-    needs: [set-vars,export-github-context, export-metadata]
+    needs: [set-vars]
     if: ${{ inputs.check-runs != '[]' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-#         id: ["build", "pr-build-passed"]
         id: ${{ fromJson(needs.set-vars.outputs.check-runs-matrix) }}
     steps:
       - name: Instantiate required check runs
