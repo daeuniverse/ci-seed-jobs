@@ -6,7 +6,7 @@ on:
       id:
         type: string
         description: "name of the check run"
-      conclusion::
+      conclusion:
         type: string
         description: "conclusion of the check run"
 
