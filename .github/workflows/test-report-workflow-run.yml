@@ -2,6 +2,9 @@ name: Report Workflow Run Result
 
 on:
   workflow_call:
+    secrets:
+      app_id: ${{ secrets.GH_APP_ID }}
+      private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
     inputs:
       id:
         type: string
@@ -23,8 +26,8 @@ jobs:
         id: generate_token
         uses: ./github/generate-auth-token
         with:
-          app_id: ${{ secrets.GH_APP_ID }}
-          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          app_id: ${{ secrets.app_id }}
+          private_key: ${{ secrets.private_key }}
 
       # https://github.com/LouisBrunner/checks-action
       - name: Report check run
