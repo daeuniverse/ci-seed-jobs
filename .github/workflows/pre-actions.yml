@@ -91,7 +91,7 @@ jobs:
           
   instantiate-check-runs:
     needs: [set-vars]
-    if: ${{ inputs.check-runs != '[]' }}
+    if: ${{ inputs.check-runs != '[]' }} && startsWith(github.event.pull_request.head.repo.full_name, github.repository_owner)
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
