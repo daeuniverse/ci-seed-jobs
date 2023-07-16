@@ -92,7 +92,7 @@ jobs:
           
   test-matrix:
     needs: [set-vars]
-    if: ${{ fromJson(needs.set-vars.outputs.check-runs-matrix) != '[]' }}
+    if: ${{ needs.set-vars.outputs.check-runs-matrix != '[]' }}
     runs-on: ubuntu-latest
 #     strategy:
 #       fail-fast: false
