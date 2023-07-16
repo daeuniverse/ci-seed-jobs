@@ -72,22 +72,22 @@ jobs:
           echo "git_sha_short=$(echo ${{ inputs.ref }} | cut -c1-6)" >> $GITHUB_OUTPUT
           echo "git_commit_msg=$(git log --format=%s -n 1 ${{ inputs.ref }})" >> $GITHUB_OUTPUT
 
-  notify-build-start:
-    runs-on: ubuntu-latest
-    needs: [export-github-context, export-metadata]
-    steps:
-      - uses: actions/checkout@master
-        with:
-          repository: daeuniverse/ci-seed-jobs
-          ref: master
-      - id: send-notification
-        uses: ./notification/notify-build-start
-        with:
-          telegram_to: ${{ secrets.TELEGRAM_TO }}
-          telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
-          git_sha_long: ${{ needs.export-metadata.outputs.git_sha_long }}
-          git_sha_short: ${{ needs.export-metadata.outputs.git_sha_short }}
-          git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
+#   notify-build-start:
+#     runs-on: ubuntu-latest
+#     needs: [export-github-context, export-metadata]
+#     steps:
+#       - uses: actions/checkout@master
+#         with:
+#           repository: daeuniverse/ci-seed-jobs
+#           ref: master
+#       - id: send-notification
+#         uses: ./notification/notify-build-start
+#         with:
+#           telegram_to: ${{ secrets.TELEGRAM_TO }}
+#           telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
+#           git_sha_long: ${{ needs.export-metadata.outputs.git_sha_long }}
+#           git_sha_short: ${{ needs.export-metadata.outputs.git_sha_short }}
+#           git_commit_msg: ${{ needs.export-metadata.outputs.git_commit_msg }}
           
   test-matrix:
     needs: [set-vars]
