@@ -41,7 +41,6 @@ jobs:
         id: set-check-runs-matrix
         run: |
           echo $input
-          echo "${{ fromJson($input) }}"
           echo "check-runs-matrix=$input" >> $GITHUB_OUTPUT
         env:
           input: ${{ inputs.check-runs }}
