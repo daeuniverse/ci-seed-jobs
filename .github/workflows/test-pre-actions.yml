@@ -40,10 +40,10 @@ jobs:
       - name: Set check-runs matrix
         id: set-check-runs-matrix
         run: |
-          echo $input
-          echo "check-runs-matrix=$input" >> $GITHUB_OUTPUT
+          echo $inputs
+          echo "check-runs-matrix=$inputs" >> $GITHUB_OUTPUT
         env:
-          input: ${{ inputs.check-runs }}
+          inputs: ${{ inputs.check-runs }}
 
   export-github-context:
     runs-on: ubuntu-latest
@@ -92,7 +92,7 @@ jobs:
           
   test-matrix:
     needs: [set-vars]
-    if: ${{ fromJson(needs.set-vars.outputs.check-runs-matrix) != [] }}
+    if: "${{ fromJson(needs.set-vars.outputs.check-runs-matrix) != '[]' }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
