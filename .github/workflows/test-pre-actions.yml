@@ -92,7 +92,7 @@ jobs:
           
   test-matrix:
     needs: [set-vars]
-    if: ${{ needs.set-vars.outputs.check-runs-matrix != '[]' }}
+    if: ${{ inputs.check-runs != '[]' }}
     runs-on: ubuntu-latest
 #     strategy:
 #       fail-fast: false
