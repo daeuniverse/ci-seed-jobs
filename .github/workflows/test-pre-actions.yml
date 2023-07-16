@@ -104,18 +104,18 @@ jobs:
           echo "${{ fromJson(needs.set-vars.outputs.check-runs-matrix) }}"
           echo "${{ inputs.check-runs != '[]' }}"
           
-#   instantiate-check-runs:
-#     needs: [set-vars]
-#     if: ${{ inputs.check-runs != '[]' }} && startsWith(github.event.pull_request.head.repo.full_name, github.repository_owner)
-#     runs-on: ubuntu-latest
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         id: ${{ fromJson(needs.set-vars.outputs.check-runs-matrix) }}
-#     steps:
-#       - name: Instantiate required check runs
-#         uses: daeuniverse/ci-seed-jobs/common/instantiate-check-runs@master
-#         with:
-#           app_id: ${{ secrets.GH_APP_ID }}
-#           private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-#           id: "dae-bot[bot]/${{ matrix.id }}"
+  instantiate-check-runs:
+    needs: [set-vars]
+    if: ${{ inputs.check-runs != '[]' }} && startsWith(github.event.pull_request.head.repo.full_name, github.repository_owner)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        id: ${{ fromJson(needs.set-vars.outputs.check-runs-matrix) }}
+    steps:
+      - name: Instantiate required check runs
+        uses: daeuniverse/ci-seed-jobs/common/instantiate-check-runs@master
+        with:
+          app_id: ${{ secrets.GH_APP_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          id: "dae-bot[bot]/${{ matrix.id }}"
