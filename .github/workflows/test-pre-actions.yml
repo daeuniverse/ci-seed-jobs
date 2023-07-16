@@ -94,10 +94,10 @@ jobs:
     needs: [set-vars]
     if: ${{ inputs.check-runs != '[]' }}
     runs-on: ubuntu-latest
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         id: ${{ fromJson(needs.set-vars.outputs.check-runs-matrix) }}
+    strategy:
+      fail-fast: false
+      matrix:
+        id: ${{ fromJson(needs.set-vars.outputs.check-runs-matrix) }}
     steps:
       - run: |
           echo "${{ needs.set-vars.outputs.check-runs-matrix }}"
