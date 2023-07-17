@@ -26,7 +26,6 @@ jobs:
           submodules: recursive
           fetch-depth: 0
           ref: main
-          token: ${{ secrets.GH_TOKEN }}
 
       - name: Sync upstream
         run: |
