@@ -115,6 +115,6 @@ jobs:
         if: ${{ inputs.check-runs != '[]' }}
         uses: daeuniverse/ci-seed-jobs/common/instantiate-check-runs@master
         with:
-          app_id: ${{ secrets.GH_APP_ID }}
-          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          app_id: ${{ secrets.app_id }}
+          private_key: ${{ secrets.private_key }}
           id: "${{ inputs.bot_name }}[bot]/${{ matrix.id }}"
