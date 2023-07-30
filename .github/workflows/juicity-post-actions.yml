@@ -18,6 +18,11 @@ on:
       private_key:
         type: string
         required: true
+    secrets:
+      private_key:
+        required: true
+      bot_name:
+        required: false
 
 jobs:
   report-workflow-run:
@@ -33,6 +38,6 @@ jobs:
         uses: ./common/report-workflow-run
         with:
           app_id: ${{ inputs.app_id }}
-          private_key: ${{ inputs.private_key }}
+          private_key: ${{ secrets.private_key }}
           id: ${{ inputs.check_run_id }}
           conclusion: ${{ inputs.check_run_conclusion }}
