@@ -22,7 +22,7 @@ on:
       app_id:
         type: string
         required: true
-      app_private_key:
+      private_key:
         type: string
         required: true
       bot_name:
