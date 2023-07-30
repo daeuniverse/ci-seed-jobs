@@ -4,13 +4,19 @@ name: Post-Build Actions
 on:
   workflow_call:
     inputs:
-      check-run-id:
+      check_run_id:
         type: string
         description: "name of the check run"
         required: true
-      check-run-conclusion:
+      check_run_conclusion:
         type: string
         description: "workflow run status (success|failure|skipped|aborted)"
+        required: true
+      app_id:
+        type: string
+        required: true
+      private_key:
+        type: string
         required: true
 
 jobs:
@@ -26,7 +32,7 @@ jobs:
       - name: Report workflow run status
         uses: ./common/report-workflow-run
         with:
-          app_id: ${{ secrets.GH_APP_ID }}
-          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-          id: ${{ inputs.check-run-id }}
-          conclusion: ${{ inputs.check-run-conclusion }}
+          app_id: ${{ inputs.app_id }}
+          private_key: ${{ inputs.private_key }}
+          id: ${{ inputs.check_run_id }}
+          conclusion: ${{ inputs.check_run_conclusion }}
