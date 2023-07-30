@@ -19,14 +19,16 @@ on:
         type: string
         required: false
         default: "[]"
-      app_id:
+      bot_name:
         type: string
-        required: true
+        required: false
+        default: "dae-bot"
     secrets:
+      app_id:
+        required: true
       private_key:
         required: true
-      bot_name:
-        required: false
+
     # Map the workflow outputs to job outputs
     outputs:
       git_sha_long:
