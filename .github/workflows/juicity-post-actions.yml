@@ -12,17 +12,11 @@ on:
         type: string
         description: "workflow run status (success|failure|skipped|aborted)"
         required: true
-      app_id:
-        type: string
-        required: true
-      private_key:
-        type: string
-        required: true
     secrets:
+      app_id:
+        required: true
       private_key:
         required: true
-      bot_name:
-        required: false
 
 jobs:
   report-workflow-run:
