@@ -31,7 +31,7 @@ jobs:
       - name: Report workflow run status
         uses: ./common/report-workflow-run
         with:
-          app_id: ${{ inputs.app_id }}
+          app_id: ${{ secrets.app_id }}
           private_key: ${{ secrets.private_key }}
           id: ${{ inputs.check_run_id }}
           conclusion: ${{ inputs.check_run_conclusion }}
