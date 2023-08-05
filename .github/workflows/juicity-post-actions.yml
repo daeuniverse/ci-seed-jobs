@@ -20,7 +20,7 @@ on:
 
 jobs:
   report-workflow-run:
-    if: ${{ startsWith(github.event.pull_request.head.repo.full_name, github.repository_owner) && inputs.check_run_conclusion != 'skipped' }}
+    if: ${{ startsWith(github.event.pull_request.head.repo.full_name, github.repository_owner) && inputs.check-run-conclusion != 'skipped' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
