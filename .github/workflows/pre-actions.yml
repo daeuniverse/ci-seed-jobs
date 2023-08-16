@@ -19,6 +19,9 @@ on:
         type: string
         required: false
         default: "[]"
+      notify:
+        type: boolean
+        default: false
     # Map the workflow outputs to job outputs
     outputs:
       git_sha_long:
@@ -73,7 +76,7 @@ jobs:
           echo "git_commit_msg=$(git log --format=%s -n 1 ${{ inputs.ref }})" >> $GITHUB_OUTPUT
 
   notify-build-start:
-    if: startsWith(github.event.pull_request.head.repo.full_name, github.repository_owner)
+    if: startsWith(github.event.pull_request.head.repo.full_name, github.repository_owner) && notify
     runs-on: ubuntu-latest
     needs: [export-github-context, export-metadata]
     steps:
