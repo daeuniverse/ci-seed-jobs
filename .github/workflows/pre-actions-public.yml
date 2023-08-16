@@ -22,6 +22,9 @@ on:
         type: string
         required: false
         default: "dae-bot"
+      notify:
+        type: boolean
+        default: false
         
     secrets:
       app_id:
@@ -87,7 +90,7 @@ jobs:
 
   notify-build-start:
     runs-on: ubuntu-latest
-    if: startsWith(github.event.pull_request.head.repo.full_name, github.repository_owner)
+    if: startsWith(github.event.pull_request.head.repo.full_name, github.repository_owner) && inputs.notify
     needs: [export-github-context, export-metadata]
     steps:
       - uses: actions/checkout@master
